@@ -9,7 +9,7 @@ exclude:
   - "/vendor/"
 
 # Site settings
-title: "Gnues's blog"
+title: "Gnues's thinking blog"
 subtitle: "Newbie of CS major"
 email: tmdqhr2586@gmail.com
 name: SeungBok, Lee
@@ -20,8 +20,9 @@ description: >
 # root of your server.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://gnueskob.github.io" # the base hostname & protocol for your site
-cover: "/assets/header_image.jpg"
+# cover: "/assets/header_image.jpg"
 logo: "/assets/logo.png"
+header-icon: "/assets/logo.png"
 
 # Build settings
 markdown: kramdown
@@ -75,14 +76,14 @@ social:
     username: 
     url: 
     desc: Follow me on Twitter
-    share: false
+    share: true
 
   - name: Facebook
     icon: facebook
     username: 
     url:
     desc: Friend me on Facebook
-    share: false
+    share: true
 
   - name: GitHub
     icon: github
@@ -96,14 +97,14 @@ social:
     username: 
     url: 
     desc: Connect with me on LinkedIn
-    share: false
+    share: true
 
   - name: Google+
     icon: google-plus
     username:
     url:
     desc: Add me to your Circles
-    share: true
+    share: false
 
   - name: YouTube
     icon: youtube
@@ -124,7 +125,7 @@ social:
     username:
     url:
     desc: Follow me on Pinterest
-    share: true
+    share: false
 
   - name: SoundCloud
     icon: soundcloud

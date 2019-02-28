@@ -74,9 +74,18 @@ pre code.hljs {
 	text-align: center;
 	&.has-cover {
 		color: $white;
-		text-shadow: 0 2px 1px rgba(0,0,0,0.67) !important;
+		// text-shadow: 0 2px 1px rgba(0,0,0,0.67) !important;
 		background-position: 50% 50%;
 		background-size: cover;
+		.title {
+			font-size: modular-scale(6);
+		}
+		.subtitle, .info {
+			font-size: modular-scale(1);
+		}
+	}
+	&.not-has-cover {
+		background-color: $colorOfYear !important;
 		.title {
 			font-size: modular-scale(6);
 		}
@@ -100,9 +109,10 @@ pre code.hljs {
 *	Header
 */
 .navigation {
-	box-shadow: 0 2px $highlight-color;
+	box-shadow: 0 4px $colorOfYear;
 	padding: 0 1em;
 	margin: 0;
+	// background-color: $colorOfYear3;
 	/*
 	*	Navigation Menu - http://refills.bourbon.io/unstyled/ (see "Navigation")
 	*/
@@ -170,7 +180,8 @@ pre code.hljs {
     padding: 0.25em 0;
     @include media ($tablet) {
       background: transparent;
-      display: inline;
+			display: inline;
+			font-weight: bold;
       text-decoration: none;
       width: auto;
     }
@@ -234,7 +245,7 @@ pre code.hljs {
 	}
 	.site-header-container {
 		color: $white;
-		text-shadow: 0 2px 1px rgba(0,0,0,0.33);
+		text-shadow: 0 4px 3px rgba(0,0,0,0.33);
 		background-color: $highlight-color;
 		.site-header{
 			.title {
