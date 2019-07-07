@@ -9,12 +9,12 @@ exclude:
   - "/vendor/"
 
 # Site settings
-title: "Gnues's thinking blog"
+title: "Talk is cheap. Show me the code."
 subtitle: "Newbie of CS major"
-email: tmdqhr2586@gmail.com
-name: SeungBok, Lee
+email: gnueskob@gmail.com
+name: Gnueskob
 description: >
-  A simple yet classy theme for your Jekyll website or blog.
+  This blog is designed to share information.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -42,7 +42,7 @@ jekyll-archives:
     tag: '/tag/:name/'
 
 # Disqus comments
-# disqus_shortname: bencentra
+disqus_shortname: "https-gnueskob-github-io"
 
 # Google analytics
 # ga_tracking_id: "UA-XXXX-1"
