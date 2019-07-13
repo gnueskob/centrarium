@@ -23,7 +23,6 @@ url: "http://gnueskob.github.io" # the base hostname & protocol for your site
 # cover: "/assets/header_image.jpg"
 logo: "/assets/logo.png"
 header-icon: "/assets/logo.png"
-timezone: Asia/Seoul
 
 # Build settings
 markdown: kramdown
@@ -50,11 +49,11 @@ disqus_shortname: "https-gnueskob-github-io"
 
 # Category descriptions (for archive pages)
 descriptions:
-  - cat: jekyll
+  - cat: Jekyll
     desc: "Posts describing Jekyll setup techniques."
 
-  - cat: dummy
-    desc: "Just some placeholder posts, lorem ipsum and the rest."
+  - cat: DailyLife
+    desc: "Just story in my daliy life."
 
 # Social icons and sharing options
 #
