@@ -49,11 +49,11 @@ disqus_shortname: "https-gnueskob-github-io"
 
 # Category descriptions (for archive pages)
 descriptions:
-  - cat: Jekyll
-    desc: "Posts describing Jekyll setup techniques."
+  - cat: jekyll
+    desc: "Jekyll 관련 기술 정보"
 
-  - cat: DailyLife
-    desc: "Just story in my daliy life."
+  - cat: chitchat
+    desc: "일상 이야기"
 
 # Social icons and sharing options
 #
