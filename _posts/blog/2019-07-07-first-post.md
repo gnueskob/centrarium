@@ -10,4 +10,4 @@ categories: Blog
 
 앞으로 많을 글을 올릴 수 있도록... 노력하겠습니다..
 
-<img src="/assets/imgs/1.jpg" style="max-width: 50%; height: auto;">
+![img]({{ "/assets/imgs/1.jpg" | absolute_url }}){: style="max-width: 50%; height: auto;" }

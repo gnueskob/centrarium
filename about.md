@@ -1,10 +1,10 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-<img src="{{ site.baseurl }}/assets/aa.gif" title="Profile Picture" class="profile">
+![aboutme]({{ "/assets/aa.gif" | absolute_url }}){: title="Profile Picture" class="profile" }
 
 - 게임을 좋아하는 **프로그래머**
 - 똑똑해지고 싶은 **게임 서버 개발자**
@@ -14,4 +14,6 @@ permalink: /about/
 
 스스로 공부한 내용을 정리하거나 도움되는 내용의 정보 글이 주로 게시될 예정입니다.
 
-찾아주시는 분들께도 좋은 정보가 되었으면 하며, 이상하거나 틀린 내용이 있을시 지적해주시면 감사하겠습니다.
+찾아주시는 분들께도 좋은 정보가 되었으면 합니다.
+
+이상하거나 틀린 내용이 있을시 지적해주세요!
