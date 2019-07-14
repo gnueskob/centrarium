@@ -4,7 +4,7 @@ title:  "Welcome to Jekyll!"
 date:   2015-04-18 08:43:59
 author: Ben Centra
 categories: jekyll
-tags: jekyll
+tags: jekyll makrdown
 cover:  "/assets/instacode.png"
 ---
 
@@ -60,6 +60,8 @@ Syntax highlighting is done using [highlight.js][highlight]. You can change the 
 
 추가로, markdown에서 제공하는 `Fenced Code Block` template를 이용할 수도 있음
 
+하지만 빌드 시 제대로 적용되지 않는 언어들도 존재하거나 indention도 달라지므로 가능하면 `Liquid` 사용을 권장
+
 {% highlight text %}
 
 ```js
@@ -73,14 +75,14 @@ demo("hello, world!", 10);
 
 {% endhighlight %}
 
-> ```js
-> function demo(string, times) {
->   for (var i = 0; i < times; i++) {
->     console.log(string);
->   }
-> }
-> demo("hello, world!", 10);
-> ```
+```js
+function demo(string, times) {
+  for (var i = 0; i < times; i++) {
+    console.log(string);
+  }
+}
+demo("hello, world!", 10);
+```
 
 ***
 
@@ -108,10 +110,17 @@ For more information, check out the [Lightbox][lightbox] website.
 markdown template을 이용하는 경우 `{: attribute="value" }`를 통해 추가 가능
 
 ```md
-[![img]({{"//bencentra.com/assets/images/falcon9_small.jpg"}}){: title="Check out the Falcon 9 from SpaceX" }]({{"//bencentra.com/assets/images/falcon9_large.jpg"}}){: data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX" }
+# one line
+[
+
+  ![img]({{"/assets/imgs/2.jpg"}})  <= md image template
+  {: title="bonobono" style="max-width: 50%; height: auto;" }   <= additional attribute
+
+]({{"/assets/imgs/2.jpg"}})   <= md link template
+{: data-lightbox="falcon9-large" data-title="real size bonobono" }  <= additional attribute
 ```
 
-[![img]({{"//bencentra.com/assets/images/falcon9_small.jpg"}}){: title="Check out the Falcon 9 from SpaceX" }]({{"//bencentra.com/assets/images/falcon9_large.jpg"}}){: data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX" }
+[![img]({{"/assets/imgs/2.jpg"}}){: title="bonobono" style="max-width: 50%; height: auto;" }]({{"/assets/imgs/2.jpg"}}){: data-lightbox="falcon9-large" data-title="real size bonobono" }
 
 ***
 
