@@ -20,14 +20,21 @@ categories: jekyll
 
 ***
 
-## **해결**
+## 오류 발생 조건
 
-직접 정적파일을 트래킹해기도 하고 카테고리, 태그 전부 바꿔가며 테스트를 해보았는데 결국 대소문자 문제였다.
+직접 정적파일을 트래킹해기도 하고 카테고리, 태그를 전부 바꿔가며 테스트를 해보았는데 터무니 없는 사실을 발견했다.
 
-`jekyll-archives`로 특정 요소를 enabled하여 사용하는 경우 `lower-case`를 사용해야 함을 명심하자...
+`jekyll-archives`로 특정 요소를 enabled하여 사용하는 경우 몇가지 특정 문자나 대문자가 들어갈 경우 위의 오류가 발생하였다.
+
+결국 임시로 아카이브를 사용할 때는 몇 가지 제한을 걸어서 사용하기로 하였다.
+
+1. 가능하면 하나의 단어로만 표현할 것
+2. `lower-case`로 사용할 것
+3. 여러개의 단어가 들어갈 경우 하이픈(`-`)으로만 연결할 것 (`kebab-case`)
+    - `something.ext` => `something-ext`
+    - `hello, world` => `hello-world`
 
 ```yml
-# 현재 지킬 아카이브 설정
 # Archive settings
 jekyll-archives:
   enabled:
