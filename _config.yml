@@ -31,16 +31,25 @@ paginate_path: "/page:num/"
 inter_post_navigation: false
 highlightjs_version: "9.15.8"
 highlightjs_theme: "vs2015"
+date_format: "%Y. %-m. %-d. %R"
 
 # Archive settings (see https://github.com/jekyll/jekyll-archives/)
 jekyll-archives:
   enabled:
+    - year
+    - month
     - categories
     - tags
-  layout: 'archive'
+  layouts:
+    category: 'archive'
+    tag: 'archive'
+    year: 'archive_year'
+    month: 'archive_month'
   permalinks:
     category: '/category/:name/'
     tag: '/tag/:name/'
+    year: '/year/:year/'
+    month: '/month/:year-:month/'
 
 # Disqus comments
 disqus_shortname: "https-gnueskob-github-io"
