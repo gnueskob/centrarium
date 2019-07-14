@@ -266,6 +266,9 @@ pre code.hljs {
 	*	Posts
 	*/
 	.post {
+		code {
+			font-family: Consolas, monaco, monospace;
+		}
 		ul {
 			margin-bottom: 1em;
 		}

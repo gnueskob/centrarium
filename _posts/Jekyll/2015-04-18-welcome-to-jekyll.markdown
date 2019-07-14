@@ -4,6 +4,7 @@ title:  "Welcome to Jekyll!"
 date:   2015-04-18 08:43:59
 author: Ben Centra
 categories: jekyll
+tags: jekyll
 cover:  "/assets/instacode.png"
 ---
 
@@ -19,7 +20,7 @@ If you list one or more categories or tags in the front matter of your post, the
 
 ### Cover Images
 
-To add a cover image to your post, set the "cover" property in the front matter with the relative URL of the image (i.e. <code>cover: "/assets/cover_image.jpg"</code>).
+To add a cover image to your post, set the "cover" property in the front matter with the relative URL of the image (i.e. `cover: "/assets/cover_image.jpg"`).
 
 ### Code Snippets
 
@@ -28,13 +29,14 @@ You can use [highlight.js][highlight] to add syntax highlight code snippets:
 Use the [Liquid][liquid] `{% raw %}{% highlight <language> %}{% endraw %}` tag to add syntax highlighting to code snippets.
 
 For instance, this template...
-{% highlight html %}
-{% raw %}{% highlight javascript %}    
-function demo(string, times) {    
-  for (var i = 0; i < times; i++) {    
-    console.log(string);    
-  }    
-}    
+
+{% highlight text %}
+{% raw %}{% highlight javascript %}
+function demo(string, times) {
+  for (var i = 0; i < times; i++) {
+    console.log(string);
+  }
+}
 demo("hello, world!", 10);
 {% endhighlight %}{% endraw %}
 {% endhighlight %}
@@ -52,15 +54,66 @@ demo("hello, world!", 10);
 
 Syntax highlighting is done using [highlight.js][highlight]. You can change the active theme in [head.html](https://github.com/bencentra/centrarium/blob/2dcd73d09e104c3798202b0e14c1db9fa6e77bc7/_includes/head.html#L15).
 
+***
+
+- 2019-07-14 Add
+
+추가로, markdown에서 제공하는 `Fenced Code Block` template를 이용할 수도 있음
+
+{% highlight text %}
+
+```js
+function demo(string, times) {
+  for (var i = 0; i < times; i++) {
+    console.log(string);
+  }
+}
+demo("hello, world!", 10);
+```
+
+{% endhighlight %}
+
+> ```js
+> function demo(string, times) {
+>   for (var i = 0; i < times; i++) {
+>     console.log(string);
+>   }
+> }
+> demo("hello, world!", 10);
+> ```
+
+***
+
 ### Images
 
-Lightbox has been enabled for images. To create the link that'll launch the lightbox, add <code>data-lightbox</code> and <code>data-title</code> attributes to an <code>&lt;a&gt;</code> tag around your <code>&lt;img&gt;</code> tag. The result is:
+Lightbox has been enabled for images. To create the link that'll launch the lightbox, add `data-lightbox` and `data-title` attributes to an `<a>` tag around your `<img>` tag. The result is:
+
+<!-- markdownlint-disable MD033 -->
+```html
+<a href="//bencentra.com/assets/images/falcon9_large.jpg" data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX">
+  <img src="//bencentra.com/assets/images/falcon9_small.jpg" title="Check out the Falcon 9 from SpaceX">
+</a>
+```
 
 <a href="//bencentra.com/assets/images/falcon9_large.jpg" data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX">
   <img src="//bencentra.com/assets/images/falcon9_small.jpg" title="Check out the Falcon 9 from SpaceX">
 </a>
 
 For more information, check out the [Lightbox][lightbox] website.
+
+***
+
+- 2019-07-14 Add
+
+markdown template을 이용하는 경우 `{: attribute="value" }`를 통해 추가 가능
+
+```md
+[![img]({{"//bencentra.com/assets/images/falcon9_small.jpg"}}){: title="Check out the Falcon 9 from SpaceX" }]({{"//bencentra.com/assets/images/falcon9_large.jpg"}}){: data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX" }
+```
+
+[![img]({{"//bencentra.com/assets/images/falcon9_small.jpg"}}){: title="Check out the Falcon 9 from SpaceX" }]({{"//bencentra.com/assets/images/falcon9_large.jpg"}}){: data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX" }
+
+***
 
 Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
 
