@@ -4,7 +4,7 @@ title:  "jekyll에서 highlight.js 적용"
 date:   2019-07-14 13:00:00 +0900
 author: Gnues
 categories: jekyll
-tags:	jekyll highlight
+tags:	jekyll highlight-js
 ---
 
 ## highlight.js 적용

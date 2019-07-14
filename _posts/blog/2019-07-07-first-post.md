@@ -3,7 +3,7 @@ layout: post
 title:  "First post"
 date:   2019-07-07 00:00:00 +0900
 author: Gnues
-categories: chitchat
+categories: daily-life
 ---
 
 - 블로그 첫글입니다.
