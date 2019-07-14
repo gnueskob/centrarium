@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "jekyll-archives 플러그인 오류"
-date:   2019-07-14 02:40:00 +0900
+date:   2019-07-14 02:41:00 +0900
 author: Gnues
 categories: jekyll
 ---
