@@ -20,9 +20,9 @@ description: >
 # root of your server.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://gnueskob.github.io" # the base hostname & protocol for your site
-cover: "/assets/cover/8bit9.gif"
+cover: "/assets/cover/lib.jpg"
 logo: "/assets/logo.png"
-header-icon: "/assets/logo.png"
+header-icon: "/assets/KnowsMore2.png"
 
 # Build settings
 markdown: kramdown
