@@ -59,6 +59,9 @@ ga_tracking_id: "UA-143826254-1"
 
 # Category descriptions (for archive pages)
 descriptions:
+  - cat: ide
+    desc: "IDE 관련 기능, 팁 정보"
+
   - cat: jekyll
     desc: "Jekyll 관련 기술 정보"
 
