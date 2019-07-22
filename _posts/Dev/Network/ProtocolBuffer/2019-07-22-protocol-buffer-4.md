@@ -4,7 +4,7 @@ title:  "Google protocol buffer (4) with C++"
 date:   2019-07-22 18:20:00 +0900
 author: Gnues
 categories: network
-tags:	network protocol-buffer google c++
+tags:	network protocol-buffer google cpp
 ---
 
 본 게시글은 [Protocol Buffer Basics: C++](https://developers.google.com/protocol-buffers/docs/cpptutorial) 글을 토대로 작성하였습니다.
