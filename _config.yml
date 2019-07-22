@@ -62,6 +62,9 @@ descriptions:
   - cat: ide
     desc: "IDE 관련 기능, 팁 정보"
 
+  - cat: network
+    desc: "네트워크 관련 정보"
+
   - cat: jekyll
     desc: "Jekyll 관련 기술 정보"
 
