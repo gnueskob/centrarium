@@ -139,8 +139,10 @@ message AddressBook {
 
 ### 주의
 
-> `Required is Forever`  
-> 특정 시점에서 `required` 필드를 쓰거나 전송하는 것을 멈추려고 `optional`로 바꾸면 문제가 생길수도 있다.  
+> `Required is Forever`
+>
+> 특정 시점에서 `required` 필드를 쓰거나 전송하는 것을 멈추려고 `optional`로 바꾸면 문제가 생길수도 있다.
+>
 > 이전 `reader`들은 이 필드가 없는 메시지들을 미완성 메시지로 간주하고 모두 드랍시키거나 거부할 수도 있다.
 
 ***

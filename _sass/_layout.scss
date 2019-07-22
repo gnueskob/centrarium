@@ -38,6 +38,7 @@ code {
 }
 
 pre code.hljs {
+	font-family: Consolas, 'Noto Sans KR';
 	font-weight: normal;
 	font-size: modular-scale(0);
 }
@@ -315,6 +316,15 @@ pre code.hljs {
 		}
 		.disqus {
 			@include span-columns(12);
+		}
+		blockquote {
+			// background-color : $colorOfYear; /*배경색 */
+			margin : 0px 0px 0px 5px; /*상우하좌 여백*/
+			border-color : $colorOfYear; /*상우하좌 순서 테두리 색*/
+			padding-left: 8px;
+			border-style : solid; /*변경 dotted : 점선 solid : 실선 dashed  긴점선 double : 두줄*/
+			border-width : 0px 0px 0px 10px; /*상우하좌 순서 테두리 굵기*/
+			border-radius : 4px 0px 0px 4px; /*좌상 우상 우하 좌하 순서 모퉁이 둥글게*/
 		}
 		.post-navigation {
 			font-size: 0.9em;
