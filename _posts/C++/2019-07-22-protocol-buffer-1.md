@@ -174,6 +174,6 @@ std::string longStr = "This is very long and clumsy text"
 
 ## References
 
-- Modern C++
+- Modern C++ 입문, 피터고츠슐링
 - [MicroSoft Visual C++](https://docs.microsoft.com/ko-kr/cpp/cpp/int8-int16-int32-int64?view=vs-2019)
 - [Cplusplus](http://www.cplusplus.com/doc/tutorial/variables/)
