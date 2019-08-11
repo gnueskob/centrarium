@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Visual Studio 2019 - static lib project"
-date:   2019-08-11 22:10:00 +0900
+date:   2019-08-11 23:10:00 +0900
 author: Gnues
 categories: editor
 tags:	editor visual-studio static-library
