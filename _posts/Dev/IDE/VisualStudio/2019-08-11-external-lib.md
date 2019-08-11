@@ -71,6 +71,10 @@ Visual Studio 2019를 기준으로 작성되었다.
 
 ***
 
+## 주의 및 확인
+
+라이브러리에 따라 프로젝트 플랫폼 설정, `C/C++ > 코드생성`의 런타임 라이브러리 설정을 바꿔야 하는 경우도 존재한다.
+
 추가 포함 디렉터리, 추가 라이브러리 디렉터리 설정을 마쳤다면 외부 라이브러리를 `#include`하고 빌드해서 제대로 작동하는지 확인하자.
 
 [![img][lib-bulid]][lib-bulid]{: data-lightbox="falcon9-large" data-title="lib-bulid" }
