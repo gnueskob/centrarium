@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>C++ 01 - 연산자 (3)</title>
+  <meta name="description" content="그간 사용해오던 언어들을 다시 정리하고 애매모호한 내용들을 바로잡기 위한 글입니다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="그간 사용해오던 언어들을 다시 정리하고 애매모호한 내용들을 바로잡기 위한 글입니다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="C++ 01 - 연산자 (3)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="C++ 01 - 연산자 (3)">
+  <meta name="twitter:description" content="그간 사용해오던 언어들을 다시 정리하고 애매모호한 내용들을 바로잡기 위한 글입니다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/language/2019/09/05/lec06.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">C++ 01 - 연산자 (3)</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 9. 5. 22:53</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/language">Language</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>그간 사용해오던 언어들을 다시 정리하고 애매모호한 내용들을 바로잡기 위한 글입니다.</p>
+
+<hr />
+
+<h2 id="section">흐름 제어 연산자</h2>
+
+<p>C++에서 함수 호출은 연산자처럼 처리한다.</p>
+
+<h3 id="section-1">조건 연산자</h3>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">c</span> <span class="o">?</span> <span class="n">x</span> <span class="o">:</span> <span class="n">y</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>삼항 연산자는 조건 c를 통해 참이면 x, 거짓임녀 y를 실행할 수 있다.</p>
+
+<p>문(<strong>statment</strong>)이 아닌 표현식만 사용할 수 있는 곳에서는 유용하다.</p>
+
+<h3 id="section-2">콤마 연산자</h3>
+
+<p>순차적인 계산을 제공하는 C++에서 특별한 연산자이다.</p>
+
+<p>콤마의 왼쪽에 있는 하위 표현식을 먼저 처리한 뒤 오른쪽에 있는 하위 표현식을 처리하는 것이다.</p>
+
+<p>표현식 전체의 값은 오른쪽 하위 표현식의 결과이다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span> <span class="o">*</span> <span class="mf">9.3</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>표현식의 결과는 <code class="highlighter-rouge">7 * 9.3</code>의 결과인 <code class="highlighter-rouge">65.1</code>이며 <code class="highlighter-rouge">3 + 4</code>는 계산처리 되지만 결과값과 전혀 관련이 없다.</p>
+
+<p>하위 표현식에서도 콤마 연산자를 포함할 수 있어 여러 시퀀스를 하나의 표현식으로 구성할 수 있다.</p>
+
+<p>특히 하나의 표현식만 사용할 수 있는 곳에서도 유용하다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">condition_check</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="p">...</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="section-3">메모리 처리</h2>
+
+<p><code class="highlighter-rouge">new</code>, <code class="highlighter-rouge">delete</code> 연산자는 메모리를 할당하고 해제할 수 있다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">SomeClass</span><span class="o">*</span> <span class="n">i</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="k">delete</span> <span class="n">i</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="section-4">접근 연산자</h2>
+
+<p>C++는 하위 구조 접근, (변수의 주소를 가져오는)참조, (주소를 통해 참조된 메모리에 접근하는)간접 참조를 위한 여러 가지 연산자들을 제공한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산</th>
+      <th>표현식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>멤버 선택</td>
+      <td>x.m</td>
+    </tr>
+    <tr>
+      <td>역참조된 멤버 선택</td>
+      <td>p-&gt;m</td>
+    </tr>
+    <tr>
+      <td>첨자</td>
+      <td>x[i]</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>역참조</td>
+      <td>*x</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>멤버 역참조</td>
+      <td>x.*pm</td>
+    </tr>
+    <tr>
+      <td>역참조된 멤버 역참조</td>
+      <td>p-&gt;*pm</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="section-5">타입 처리</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산</th>
+      <th>표현식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>런타임 타입식별</td>
+      <td>typeid(x)</td>
+    </tr>
+    <tr>
+      <td>타입 식별</td>
+      <td>typeid(t)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>오브젝트 크기</td>
+      <td>sizeof(x) or sizeof x</td>
+    </tr>
+    <tr>
+      <td>타입의 크기</td>
+      <td>sizeof(t)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 인수의 개수</td>
+      <td>sizeof…(p)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 타입 인수의 개수</td>
+      <td>sizeof…(P)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 맞춤(Alignment)</td>
+      <td>alignof(x)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 타입의 맞춤</td>
+      <td>alignof(t)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">sizeof</code> 연산자는 표현식에서 사용될 경우 괄호 없이 사용할 수 있는 유일한 연산자이다.</p>
+
+<hr />
+
+<h2 id="section-6">오류 처리 연산자</h2>
+
+<p><code class="highlighter-rouge">throw</code> 연산자를 통해 실행 시 예외를 발생시킬 수 있다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="k">try</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">cond</span><span class="p">)</span>
+    <span class="k">throw</span> <span class="n">error</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(...)</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="section-7">오버로딩 연산자</h2>
+
+<p>C++는 새로운 타입에 대해 연산자들을 정의할 수 있다.</p>
+
+<p>내장 타입들의 연산자는 변경할 수 없으나 내장 타입들이 정의한 타입과 어떻게 상호 작용할 지 정의할 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산</th>
+      <th>표현식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>스코프(범위) 지정</td>
+      <td>::</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++17</code> 멤버 선택</td>
+      <td>.</td>
+    </tr>
+    <tr>
+      <td>포인터 멤버 선택</td>
+      <td>.*</td>
+    </tr>
+    <tr>
+      <td>조건부</td>
+      <td>?:</td>
+    </tr>
+    <tr>
+      <td>타입이나 오브젝트 크기</td>
+      <td>sizeof</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 인수의 개수</td>
+      <td>sizeof…</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">C++11</code> 타입이나 오브젝트의 메모리 맞춤</td>
+      <td>alignof</td>
+    </tr>
+    <tr>
+      <td>타입 식별자</td>
+      <td>typeid</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Modern C++ 입문, 피터고츠슐링</li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/cpp">cpp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=C%2B%2B+01+-+%EC%97%B0%EC%82%B0%EC%9E%90+%283%29&url=http%3A%2F%2Fgnueskob.github.io%2Flanguage%2F2019%2F09%2F05%2Flec06.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=C%2B%2B+01+-+%EC%97%B0%EC%82%B0%EC%9E%90+%283%29&u=http%3A%2F%2Fgnueskob.github.io%2Flanguage%2F2019%2F09%2F05%2Flec06.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Flanguage%2F2019%2F09%2F05%2Flec06.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/language/2019/09/05/lec06.html') + '&title=C++ 01 - 연산자 (3)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

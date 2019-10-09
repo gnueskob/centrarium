@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>jekyll-archives 플러그인 오류</title>
+  <meta name="description" content="깃헙 페이지에 Jekyll 외부 플러그인을 사용할 수 있게 되었으나 jekyll-archives 기능이 제대로 작동하지 않는 문제가 생겼다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="깃헙 페이지에 Jekyll 외부 플러그인을 사용할 수 있게 되었으나 jekyll-archives 기능이 제대로 작동하지 않는 문제가 생겼다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="jekyll-archives 플러그인 오류" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="jekyll-archives 플러그인 오류">
+  <meta name="twitter:description" content="깃헙 페이지에 Jekyll 외부 플러그인을 사용할 수 있게 되었으나 jekyll-archives 기능이 제대로 작동하지 않는 문제가 생겼다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/jekyll/2019/07/14/jekyll-archive.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">jekyll-archives 플러그인 오류</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 14. 02:41</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/jekyll">Jekyll</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>깃헙 페이지에 Jekyll 외부 플러그인을 사용할 수 있게 되었으나 <code class="highlighter-rouge">jekyll-archives</code> 기능이 제대로 작동하지 않는 문제가 생겼다.</p>
+
+<p>현재 블로그는 <a href="bencentra/centrarium">bencentra/centrarium</a> 테마를 기반으로 제작하고 있는데, 기본적으로 <code class="highlighter-rouge">jekyll-archives</code>를 미리 사용하고 있다.</p>
+
+<p>그런데, 각 포스트(작성글)에서 사용하는 카테고리, 태그 등의 아카이브 요소들을 기준으로 검색하는 페이지가 간헐적으로 작동하지 않는다.</p>
+
+<p>각 포스트의 <code class="highlighter-rouge">category</code>, <code class="highlighter-rouge">tag</code>를 설정하는 것과 <a href="https://gnueskob.github.io/posts/">posts 페이지</a>에서의 포스트 별 카테고리 랜더링까지도 문제가 없다.</p>
+
+<p>하지만 <code class="highlighter-rouge">category</code>와 <code class="highlighter-rouge">tag</code>를 포함하는 포스트 글을 묶어 보여주는 페이지가 이상하게도 404 에러가 뜬다.</p>
+
+<p>로컬에서는 위의 제한사항 없이도 정상적으로 작동하지만 깃헙 페이지로 호스팅할 경우에만 나타난다.</p>
+
+<hr />
+
+<h2 id="section">오류 발생 조건</h2>
+
+<p>직접 정적파일을 트래킹해기도 하고 카테고리, 태그를 전부 바꿔가며 테스트를 해보았는데 터무니 없는 사실을 발견했다.</p>
+
+<p><code class="highlighter-rouge">jekyll-archives</code>로 특정 요소를 enabled하여 사용하는 경우 몇가지 특정 문자나 대문자가 들어갈 경우 위의 오류가 발생하였다.</p>
+
+<p>결국 임시로 아카이브를 사용할 때는 몇 가지 제한을 걸어서 사용하기로 하였다.</p>
+
+<ol>
+  <li>가능하면 하나의 단어로만 표현할 것</li>
+  <li><code class="highlighter-rouge">lower-case</code>로 사용할 것</li>
+  <li>여러개의 단어가 들어갈 경우 하이픈(<code class="highlighter-rouge">-</code>)으로만 연결할 것 (<code class="highlighter-rouge">kebab-case</code>)
+    <ul>
+      <li><code class="highlighter-rouge">something.ext</code> =&gt; <code class="highlighter-rouge">something-ext</code></li>
+      <li><code class="highlighter-rouge">hello, world</code> =&gt; <code class="highlighter-rouge">hello-world</code></li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="c1"># Archive settings</span>
+<span class="s">jekyll-archives</span><span class="pi">:</span>
+  <span class="s">enabled</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">categories</span>
+    <span class="pi">-</span> <span class="s">tags</span>
+  <span class="s">layout</span><span class="pi">:</span> <span class="s1">'</span><span class="s">archive'</span>
+  <span class="s">permalinks</span><span class="pi">:</span>
+    <span class="s">category</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/category/:name/'</span>
+    <span class="s">tag</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/tag/:name/'</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><a href="https://github.com/jekyll/jekyll-archives/">jekyll-archives Github</a></li>
+</ul>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=jekyll-archives+%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8+%EC%98%A4%EB%A5%98&url=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fjekyll-archive.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=jekyll-archives+%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8+%EC%98%A4%EB%A5%98&u=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fjekyll-archive.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fjekyll-archive.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/jekyll/2019/07/14/jekyll-archive.html') + '&title=jekyll-archives 플러그인 오류'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

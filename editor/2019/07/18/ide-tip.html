@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Visual Studio 2019 - Multi-Caret</title>
+  <meta name="description" content="Visual Studio 자체만으로도 훌륭한 IDE이지만 여러 가지 기능을 알고 사용한다면 개발 생산성에 큰 도움이 된다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Visual Studio 자체만으로도 훌륭한 IDE이지만 여러 가지 기능을 알고 사용한다면 개발 생산성에 큰 도움이 된다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Visual Studio 2019 - Multi-Caret" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Visual Studio 2019 - Multi-Caret">
+  <meta name="twitter:description" content="Visual Studio 자체만으로도 훌륭한 IDE이지만 여러 가지 기능을 알고 사용한다면 개발 생산성에 큰 도움이 된다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/editor/2019/07/18/ide-tip.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Visual Studio 2019 - Multi-Caret</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 18. 00:12</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/editor">Editor</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>Visual Studio 자체만으로도 훌륭한 IDE이지만 여러 가지 기능을 알고 사용한다면 개발 생산성에 큰 도움이 된다.</p>
+
+<p>본 기능 설명은 Visual Studio 2019 버전 기준이다.</p>
+
+<p>더욱 자세한 내용은 <a href="https://docs.microsoft.com/ko-kr/visualstudio/ide/?view=vs-2019">Visual Studio 공식 홈페이지</a>에서 확인할 수 있다.</p>
+
+<hr />
+
+<h2 id="multi-caret-support">Multi-Caret Support</h2>
+
+<p><strong><code class="highlighter-rouge">편집 &gt; 다중 캐럿</code> 탭에서 확인할 수 있다.</strong></p>
+
+<p>다른 IDE에서도 지원하고 있는 <code class="highlighter-rouge">multi-selection</code>기능이다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Ctrl + Alt + Click</code></li>
+</ul>
+
+<p>해당 단축키로 동시에 여러 곳에 캐럿(<code class="highlighter-rouge">Caret</code>) 혹은 커서(<code class="highlighter-rouge">Cursor</code>)를 활성화 시킬 수 있으며, 동시에 활성화 된 여러 캐럿에서 수정, 삭제 등이 가능하다.</p>
+
+<p>커서 한 곳을 선택할 수도 있고 연결되는 공간을 선택(단어 자체를 활성화)할 수도 있다.</p>
+
+<p>원래 활성화되어있던 캐럿의 색이 빨간색이고 추가된 캐럿은 파란색이다.</p>
+
+<p><img src="/assets/visualStudio/AddCarets.gif" alt="img" /></p>
+
+<hr />
+
+<ul>
+  <li><code class="highlighter-rouge">Shift + Alt + Click</code></li>
+</ul>
+
+<p>활성화 된 커서에서 위의 단축키를 실행하면 활성화 캐럿 ~ 클릭한 캐럿의 위치까지 직사각형 범위의 모든 공간이 선택된다.</p>
+
+<p><img src="/assets/visualStudio/shiftAltClick.gif" alt="img" /></p>
+
+<hr />
+
+<ul>
+  <li><code class="highlighter-rouge">Shift + Alt + .</code></li>
+</ul>
+
+<p>특정 단어에서 단축키를 누르면 해당 단어에 캐럿이 활성화된다.</p>
+
+<p>해당 단축키를 더 누를 시 문서에 존재하는 동일한 단어 중 다음으로 오는 단어가 동시에 활성화된다.</p>
+
+<p>문서의 끝까지 활성화 시키고 나면 문서의 처음에서 부터 검사하게 된다.</p>
+
+<p><img src="/assets/visualStudio/shiftAltDot.gif" alt="img" /></p>
+
+<hr />
+
+<ul>
+  <li><code class="highlighter-rouge">Shift + Alt + ,</code></li>
+</ul>
+
+<p><code class="highlighter-rouge">Shift + Alt + .</code>에 의해서 여러개의 동일한 단어에 캐럿이 활성화 되어있는 상태일 때, 해당 단축키를 누르면 마지막으로 활성화 시켰던 단어의 캐럿이 해제된다.</p>
+
+<p><img src="/assets/visualStudio/shiftAltComma.gif" alt="img" /></p>
+
+<hr />
+
+<ul>
+  <li><code class="highlighter-rouge">Shift + Alt + ;</code></li>
+</ul>
+
+<p>문서 내에 동일한 모든 단어에 캐럿이 활성화된다.</p>
+
+<p><img src="/assets/visualStudio/shiftAltSemicolon.gif" alt="img" /></p>
+
+<hr />
+
+<ul>
+  <li><code class="highlighter-rouge">Shift + Alt + /</code></li>
+</ul>
+
+<p>동일한 단어를 multi-select한 상태일 경우 마지막 캐럿의 위치를 다음의 동일 단어로 옮긴다.</p>
+
+<p><img src="/assets/visualStudio/shiftAltSlash.gif" alt="img" /></p>
+
+<h2 id="references">References</h2>
+
+<p><strong>주의</strong> - 참고자료와 단축키가 다른 경우가 존재하므로 에디터에서 직접 확인하자.</p>
+
+<ul>
+  <li><a href="https://devblogs.microsoft.com/visualstudio/improving-your-productivity-in-the-visual-studio-editor/">https://devblogs.microsoft.com/visualstudio/improving-your-productivity-in-the-visual-studio-editor/</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/editor">editor</a>,&nbsp;<a href="/tag/visual-studio">visual-studio</a>,&nbsp;<a href="/tag/shortcut">shortcut</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Visual+Studio+2019+-+Multi-Caret&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F18%2Fide-tip.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Visual+Studio+2019+-+Multi-Caret&u=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F18%2Fide-tip.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F18%2Fide-tip.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/editor/2019/07/18/ide-tip.html') + '&title=Visual Studio 2019 - Multi-Caret'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

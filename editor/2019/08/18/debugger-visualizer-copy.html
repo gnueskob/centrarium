@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Visual Studio 2017 - C++ Debugger Visualizers</title>
+  <meta name="description" content="이번 글에서는 C++ Debugger Visualizers에 대해 소개한다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이번 글에서는 C++ Debugger Visualizers에 대해 소개한다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Visual Studio 2017 - C++ Debugger Visualizers" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Visual Studio 2017 - C++ Debugger Visualizers">
+  <meta name="twitter:description" content="이번 글에서는 C++ Debugger Visualizers에 대해 소개한다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/editor/2019/08/18/debugger-visualizer-copy.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Visual Studio 2017 - C++ Debugger Visualizers</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 8. 18. 19:00</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/editor">Editor</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이번 글에서는 <strong>C++ Debugger Visualizers</strong>에 대해 소개한다.</p>
+
+<p>VS2017 버전까지 지원하며 Boost, wxWidgets, TinyXML, TinyXML2 라이브러리를 지원한다.</p>
+
+<p>아직까지는 VS2019 버전은 지원하지 않는다.</p>
+
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ArkadyShapkin.CDebuggerVisualizersforVS2017">Marketplace Link</a></p>
+
+<p><a href="https://github.com/KindDragon/CPPDebuggerVisualizers/issues">Github Link</a></p>
+
+<p>C++ Debugger Visualizers를 소개하기전에 먼저 Visualizers가 무엇인지 소개하고 넘어가겠다.</p>
+
+<hr />
+
+<h2 id="visualizers">Visualizers</h2>
+
+<p>비주얼 스튜디오에서는 디버깅 중 개체위에 커서를 올리면 조사식처럼 개체 정보를 나타내주는 창(<strong>DataTip</strong>)을 팝업시킨다.</p>
+
+<p><a href="/assets/visualStudio/dataTip.png" data-lightbox="falcon9-large" data-title="dataTip"><img src="/assets/visualStudio/dataTip.png" alt="img" /></a></p>
+
+<p>혹은 조사식에서도 동일하게 개체의 정보를 확인할 수 있다.</p>
+
+<p><a href="/assets/visualStudio/watch.png" data-lightbox="falcon9-large" data-title="watch"><img src="/assets/visualStudio/watch.png" alt="img" /></a></p>
+
+<p>개체 정보중에 특정 타입의 경우에는 돋보기가 나타나며 클릭해보면 여러가지 <strong>시각화 도우미</strong> 들이 목록에 나타날 것이다.</p>
+
+<p><a href="/assets/visualStudio/visualizers.png" data-lightbox="falcon9-large" data-title="visualizers"><img src="/assets/visualStudio/visualizers.png" alt="img" /></a></p>
+
+<p>이것이 Visualizer 이다.</p>
+
+<p>내장되어 있는 Visualizer는 총 4가지이며 이 Type의 개체를 디버깅 할때만 Visualizer가 발동된다.</p>
+
+<ul>
+  <li>Text</li>
+  <li>Html</li>
+  <li>Xml</li>
+  <li>DataSet</li>
+</ul>
+
+<p>VS2005 버전 이후로는 내장된 Visualizer 이외에도 커스터마이징하여 자신만의 Visualizer를 제작할 수 있다.</p>
+
+<p>예로, 이미지개체를 처리할 때 실제로 이미지를 볼 수 있도록 사용할 수도 있다.</p>
+
+<p><a href="/assets/visualStudio/imageVisualizer.jpg" data-lightbox="falcon9-large" data-title="ImgVisualizer"><img src="/assets/visualStudio/imageVisualizer.jpg" alt="img" /></a></p>
+
+<p>비주얼 스튜디오는 이렇게 디버깅 시 개발자가 빈번하게 접하는 데이터 시각화를 커스터마이징하는 기능을 제공한다.</p>
+
+<p>이를 통해 사용자 정의 시각화 모듈을 생성해 디버깅에 유용하게 활용할 수 있다.</p>
+
+<p>다음의 이미지를 통해 쉽게 이해할 수 있을 것이다.</p>
+
+<p><a href="/assets/visualStudio/visualizer_before.png" data-lightbox="falcon9-large" data-title="visualizerBefore"><img src="/assets/visualStudio/visualizer_before.png" alt="img" /></a></p>
+
+<blockquote>
+  <p>커스텀 데이터 시각화 적용 전</p>
+</blockquote>
+
+<p><a href="/assets/visualStudio/visualizer_after.png" data-lightbox="falcon9-large" data-title="visualizerAfter"><img src="/assets/visualStudio/visualizer_after.png" alt="img" /></a></p>
+
+<blockquote>
+  <p>커스텀 데이터 시각화 적용 후</p>
+</blockquote>
+
+<hr />
+
+<h2 id="natvis-visualizer">Natvis Visualizer</h2>
+
+<p>비주얼 스튜디오 디버깅 창의 ‘텍스트 시각화 사용자 정의 규칙’은 <strong>autoexp.dat</strong> 파일을 통해 정의되는데, 이러한 문법을 통해 <strong>자동, 지역식, 조사식</strong> 창에서 변수값을 조회할 수 있다.</p>
+
+<p>오랜 기간 비주얼 스튜디오를 사용했다면 비주얼 C++의 STL (Stan dard Template Library)로 고생했던 경험이 한 번쯤은 있을 것이다.</p>
+
+<p>예전에는 STL의 난해한 에러 코드와 경고 메시지, 텍스트 시각화로 인해 인스턴스를 포함한 멤버 변수를 찾는 데에만 상당한 시간이 걸렸기 때문이다.</p>
+
+<p>이러한 불편 때문인지 비주얼 스튜디오는 새로운 버전이 출시될 때마다 텍스트 시각화 기능이 점차 개선돼왔다.</p>
+
+<p>텍스트 시각화가 보기 편해졌을 뿐 아니라 디버깅 시에도 원하는 정보를 보다 쉽게 찾을 수 있게 됐다.</p>
+
+<p>이러한 변화의 중심에는 텍스트 사용자 정의 규칙의 업데이트가 있었다.</p>
+
+<p>VS 2012에서는 텍스트 시각화 사용자 정의 규칙이 대대적으로 개선됐다.</p>
+
+<p>기존 autoexp.dat를 이용한 정의 방식의 문제점을 보완하고, 개발자가 사용하기 쉽도록 xml 문법으로 규칙을 기술하도록 변경됐다.</p>
+
+<p>또한 텍스트 시각화 사용자 정의 규칙을 정의할 때 발생할 수 있는 문제점에 대한 추적도 한결 쉬워졌다.</p>
+
+<p>게다가 정의 파일에 대한 버전관리나 여러 파일로 나누어 프레임워크별, 규칙별, 프로젝트별로 규칙을 적용할 수 있는 <strong>Natvis</strong> 프레임워크도 추가됐다.</p>
+
+<blockquote>
+  <p>Nativis 프레임워크를 통해 visualizer를 만드는 방법은 아래 링크를 참조</p>
+
+  <ul>
+    <li><a href="https://docs.microsoft.com/en-us/visualstudio/debugger/create-custom-views-of-native-objects?view=vs-2019">Create custom views of C++ objects in the debugger</a></li>
+    <li><a href="https://www.kdata.or.kr/info/info_04_view.html?field=title&amp;keyword=%BB%E7%BF%EB%C0%DA%20%C1%A4%C0%C7%20%C5%D8%BD%BA%C6%AE%20%BD%C3%B0%A2%C8%AD&amp;type=techreport&amp;page=1&amp;dbnum=177748&amp;mode=detail&amp;type=techreport">네이티브 환경에서 사용자 정의 텍스트 시각화 만들기 (1)</a></li>
+    <li><a href="https://www.kdata.or.kr/info/info_04_view.html?field=title&amp;keyword=%BB%E7%BF%EB%C0%DA%20%C1%A4%C0%C7%20%C5%D8%BD%BA%C6%AE%20%BD%C3%B0%A2%C8%AD&amp;type=techreport&amp;page=1&amp;dbnum=178647&amp;mode=detail&amp;type=techreport">네이티브 환경에서 사용자 정의 텍스트 시각화 만들기 (2)</a></li>
+    <li><a href="https://www.kdata.or.kr/info/info_04_view.html?field=title&amp;keyword=%BB%E7%BF%EB%C0%DA%20%C1%A4%C0%C7%20%C5%D8%BD%BA%C6%AE%20%BD%C3%B0%A2%C8%AD&amp;type=techreport&amp;page=1&amp;dbnum=179747&amp;mode=detail&amp;type=techreport">네이티브 환경에서 사용자 정의 텍스트 시각화 만들기 외전</a></li>
+  </ul>
+</blockquote>
+
+<hr />
+
+<h2 id="c-debugger-visualizers">C++ Debugger Visualizers</h2>
+
+<p><strong>C++ Debugger Visualizers</strong>는 여러가지 라이브러리를 위해 설계된 Visualizer이다.</p>
+
+<p>문서의 머릿말에 소개한 것 처럼 VS2017 버전까지 지원하며 Boost, wxWidgets, TinyXML, TinyXML2 라이브러리를 지원한다.</p>
+
+<p>하지만 아직까지는 VS2019 버전은 지원하지 않는다.</p>
+
+<p>VS2017 버전에서는 <a href="https://marketplace.visualstudio.com/items?itemName=ArkadyShapkin.CDebuggerVisualizersforVS2017">Marketplace</a>에서 쉽게 설치할 수 있다.</p>
+
+<p><a href="/assets/visualStudio/debuggerVisualizer.png" data-lightbox="falcon9-large" data-title="debuggerVisualizer"><img src="/assets/visualStudio/debuggerVisualizer.png" alt="img" /></a></p>
+
+<p>해당 visualizer를 설치하고 지원하는 라이브러리를 사용해보면 디버깅을 보다 편히할 수 있을 것이다.</p>
+
+<p>아래 이미지는 boost 라이브러리의 multi-index를 사용하여 visualizer 유무 차이를 보여준다.</p>
+
+<p><a href="/assets/visualStudio/testMultiIndexVisualizer2.png" data-lightbox="falcon9-large" data-title="multiIndex2"><img src="/assets/visualStudio/testMultiIndexVisualizer2.png" alt="img" /></a></p>
+
+<blockquote>
+  <p>boost library - multi-index 디버깅 테스트 (C++ Debugger Visualizers 적용 X)</p>
+</blockquote>
+
+<p><a href="/assets/visualStudio/testMultiIndexVisualizer.png" data-lightbox="falcon9-large" data-title="multiIndex"><img src="/assets/visualStudio/testMultiIndexVisualizer.png" alt="img" /></a></p>
+
+<blockquote>
+  <p>boost library - multi-index 디버깅 테스트 (C++ Debugger Visualizers 적용)</p>
+</blockquote>
+
+<p>이처럼 visualizer를 통해 자신만의 디버깅 환경을 구축하여 보다 쉽고 빠르게 디버깅을 할 수 있다.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://www.bangsil.net/MyPosts/?postId=13da98de-2d3f-4d03-80ba-8e422407f15b">방실 블로그</a></li>
+  <li><a href="https://www.kdata.or.kr/info/info_04_view.html?field=title&amp;keyword=%BB%E7%BF%EB%C0%DA%20%C1%A4%C0%C7%20%C5%D8%BD%BA%C6%AE%20%BD%C3%B0%A2%C8%AD&amp;type=techreport&amp;page=1&amp;dbnum=177748&amp;mode=detail&amp;type=techreport">한국 데이터 산업 진흥원</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/visualstudio/debugger/create-custom-views-of-native-objects?view=vs-2019">MicroSoft VS docs</a></li>
+  <li><a href="https://github.com/KindDragon/CPPDebuggerVisualizers/issues">C++ Debugger Visualizers</a></li>
+</ul>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/editor">editor</a>,&nbsp;<a href="/tag/visual-studio">visual-studio</a>,&nbsp;<a href="/tag/debug">debug</a>,&nbsp;<a href="/tag/debugger-visualizer">debugger-visualizer</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Visual+Studio+2017+-+C%2B%2B+Debugger+Visualizers&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F18%2Fdebugger-visualizer-copy.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Visual+Studio+2017+-+C%2B%2B+Debugger+Visualizers&u=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F18%2Fdebugger-visualizer-copy.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F18%2Fdebugger-visualizer-copy.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/editor/2019/08/18/debugger-visualizer-copy.html') + '&title=Visual Studio 2017 - C++ Debugger Visualizers'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

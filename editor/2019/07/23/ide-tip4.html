@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Visual Studio 2019 - Better multi-monitor</title>
+  <meta name="description" content="저번 포스팅에 이어서 다른 기능을 정리한다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="저번 포스팅에 이어서 다른 기능을 정리한다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Visual Studio 2019 - Better multi-monitor" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Visual Studio 2019 - Better multi-monitor">
+  <meta name="twitter:description" content="저번 포스팅에 이어서 다른 기능을 정리한다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/editor/2019/07/23/ide-tip4.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Visual Studio 2019 - Better multi-monitor</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 23. 23:20</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/editor">Editor</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>저번 포스팅에 이어서 다른 기능을 정리한다.</p>
+
+<p>본 기능 설명은 Visual Studio 2019 버전 기준이다.</p>
+
+<p>더욱 자세한 내용은 <a href="https://docs.microsoft.com/ko-kr/visualstudio/ide/?view=vs-2019">Visual Studio 공식 홈페이지</a>에서 확인할 수 있다.</p>
+
+<hr />
+
+<h2 id="per-monitor-dpi-awareness-pma">Per-monitor DPI awareness (PMA)</h2>
+
+<p>Visual Studio 2019는 이제 IDE 전체에서 <code class="highlighter-rouge">Per-monitor DPI Awareness(PMA, 모니터 별 DPI 인식)</code> 을 지원한다.</p>
+
+<p><code class="highlighter-rouge">PMA</code>는 모든 모니터 디스플레이 배율 및 DPI 구성에서 맞춰서 작업중인 코드를 선명하게 볼 수 있게 해준다.</p>
+
+<p><a href="/assets/visualStudio/word-image.png" data-lightbox="falcon9-large" data-title="system scaling vs. PMA option enabled"><img src="/assets/visualStudio/word-image.png" alt="img" /></a></p>
+
+<blockquote>
+  <p>Left - Visual Studio 2019 with system scaling</p>
+
+  <p>Right - Visual Studio 2019 with the PMA option enabled.</p>
+</blockquote>
+
+<p>몇몇 상황에선 폰트, 아이콘 등이 흐릿해지거나 내용이 잘못 랜더링 될 수 있다.</p>
+
+<ul>
+  <li>여러 모니터에서 각기 다른 모니터 디스플레이 배율 계수를 사용하는 경우</li>
+  <li>다른 설정을 가진 기기에서 원격으로 visual studio를 사용하는 경우</li>
+</ul>
+
+<p>이전 버전의 Visual studio는 <code class="highlighter-rouge">PMA</code> 기능보다 <code class="highlighter-rouge">system scaled application</code> 기능이 우선적용되어 랜더링하기 때문에 위 상황이 발생할 수 있다.</p>
+
+<hr />
+
+<h2 id="system-scaled-applications">System scaled applications</h2>
+
+<p>이 기능은 기본 디스플레이와 동일한 구성의 다른 디스플레이에서 정확하게 렌더링된다.</p>
+
+<p>하지만 구성이 다른 디스플레이에서 렌더링할 때 흐릿한 글꼴과 영상과 같은 시각적 퇴행성을 갖는다.</p>
+
+<p>장시간 작업할 때 이러한 문제는 눈에 피로감을 준다.</p>
+
+<hr />
+
+<h2 id="how-to-enable-pma-for-visual-studio-2019">How to enable PMA for Visual Studio 2019</h2>
+
+<p>Visual Studio 2019 릴리스부터 <code class="highlighter-rouge">PMA(모니터별 인식)</code>을 기본으로 제공한다.</p>
+
+<p>Visual Studio에서 사용하는 표시 배율에 관계없이 정확하게 렌더링된다.</p>
+
+<p><code class="highlighter-rouge">[도구 &gt; 옵션] 환경 &gt; 일반</code></p>
+
+<p><img src="/assets/visualStudio/pma-dpi-scaling.png" alt="img" /></p>
+
+<p>해당 기능을 이용하려면 <code class="highlighter-rouge">Windows 10 버전 1803</code>, <code class="highlighter-rouge">.NET Framework 4.8 버전</code>이 필요하다.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://devblogs.microsoft.com/visualstudio/a-better-multi-monitor-experience-with-visual-studio-2019/">https://devblogs.microsoft.com/visualstudio/a-better-multi-monitor-experience-with-visual-studio-2019/</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/editor">editor</a>,&nbsp;<a href="/tag/visual-studio">visual-studio</a>,&nbsp;<a href="/tag/multi-monitor">multi-monitor</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Visual+Studio+2019+-+Better+multi-monitor&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F23%2Fide-tip4.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Visual+Studio+2019+-+Better+multi-monitor&u=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F23%2Fide-tip4.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F07%2F23%2Fide-tip4.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/editor/2019/07/23/ide-tip4.html') + '&title=Visual Studio 2019 - Better multi-monitor'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

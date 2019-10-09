@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Google protocol buffer (3) with C++</title>
+  <meta name="description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Google protocol buffer (3) with C++" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Google protocol buffer (3) with C++">
+  <meta name="twitter:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/network/2019/07/22/protocol-buffer-3.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Google protocol buffer (3) with C++</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 22. 18:20</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/network">Network</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>본 게시글은 <a href="https://developers.google.com/protocol-buffers/docs/cpptutorial">Protocol Buffer Basics: C++</a> 글을 토대로 작성하였습니다.</p>
+
+<hr />
+
+<h2 id="compiling-your-protocol-buffers">Compiling Your Protocol Buffers</h2>
+
+<p><code class="highlighter-rouge">.proto</code>파일을 생성했으니, 이제 <code class="highlighter-rouge">AddressBook</code>메시지를 쓰고 읽을 수 있는 클래스를 생성해야 한다.</p>
+
+<p>프로토콜 버퍼 컴파일러 <code class="highlighter-rouge">protoc</code>를 자신의 <code class="highlighter-rouge">.proto</code>파일에 실행하자.</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>protoc -l<span class="o">=</span><span class="nv">$SRC_DIR</span> --cpp_out<span class="o">=</span><span class="nv">$DST_DIR</span> <span class="nv">$SRC_DIR</span>/addressbook.proto
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">-l</code> : 자신의 어플리케이션 소스가 있는 곳 (default: 현재 디렉토리가 사용됨)</li>
+  <li><code class="highlighter-rouge">--cpp_out</code> : 클래스 코드를 생성하려는 디렉토리</li>
+  <li><code class="highlighter-rouge">.proto</code>파일이 있는 경로</li>
+</ul>
+
+<p>해당 명령을 통해 컴파일을 진행하면 <code class="highlighter-rouge">addressbook.ph.h</code>, <code class="highlighter-rouge">addressbook.pb.cc</code> 파일이 생성된다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">addressbook.ph.h</code> : 생성된 클래스들을 정의하는 헤더 파일</li>
+  <li><code class="highlighter-rouge">addressbook.pb.cc</code> : 클래스들의 구현 부분을 포함하는 파일</li>
+</ul>
+
+<hr />
+
+<h2 id="the-protocol-buffer-api">The Protocol Buffer API</h2>
+
+<p>생성된 코드들은 다소 복잡하게 되어있다. <code class="highlighter-rouge">Person</code> 클래스를 좀더 들여다 보면 아래와 같은 함수들을 포함하고 있을 것이다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="c1">// name
+</span><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">has_name</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear_name</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="k">const</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">set_name</span><span class="p">(</span><span class="k">const</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">);</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">set_name</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">value</span><span class="p">);</span>
+<span class="kr">inline</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">mutable_name</span><span class="p">();</span>
+
+<span class="c1">// id
+</span><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">has_id</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear_id</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="kt">int32_t</span> <span class="n">id</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">set_id</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">value</span><span class="p">);</span>
+
+<span class="c1">// email
+</span><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">has_email</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear_email</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="k">const</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">email</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">set_email</span><span class="p">(</span><span class="k">const</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">);</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">set_email</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">value</span><span class="p">);</span>
+<span class="kr">inline</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">mutable_email</span><span class="p">();</span>
+
+<span class="c1">// phone
+</span><span class="kr">inline</span> <span class="kt">int</span> <span class="n">phone_size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear_phone</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="k">const</span> <span class="o">::</span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="o">::</span><span class="n">RepeatedPtrField</span><span class="o">&lt;</span> <span class="o">::</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person_PhoneNumber</span> <span class="o">&gt;&amp;</span> <span class="n">phone</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="o">::</span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="o">::</span><span class="n">RepeatedPtrField</span><span class="o">&lt;</span> <span class="o">::</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person_PhoneNumber</span> <span class="o">&gt;*</span> <span class="n">mutable_phone</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="k">const</span> <span class="o">::</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person_PhoneNumber</span><span class="o">&amp;</span> <span class="n">phone</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="o">::</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person_PhoneNumber</span><span class="o">*</span> <span class="n">mutable_phone</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">);</span>
+<span class="kr">inline</span> <span class="o">::</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person_PhoneNumber</span><span class="o">*</span> <span class="n">add_phone</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">commons</code>
+    <ul>
+      <li><code class="highlighter-rouge">getter</code>들은 필드 이름과 동일하게 소문자로 구현되어 있고 <code class="highlighter-rouge">setter</code>들은 <code class="highlighter-rouge">set_</code>으로 시작한다.</li>
+      <li>각각의 단일 필드(<code class="highlighter-rouge">required</code>, <code class="highlighter-rouge">optional</code>)에 대해서 값이 셋팅 되어있는지 여부를 알려주는 <code class="highlighter-rouge">has_</code>메소드들도 있다. (<code class="highlighter-rouge">proto2</code> 전용)</li>
+      <li>또한, 각 필드의 값을 비우는 <code class="highlighter-rouge">clear_</code>메소드 들도 존재한다.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">string extra method</code>
+    <ul>
+      <li><code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">email</code> 필드는 문자열 타입으로 몇 개의 추가 메소드들을 가지고 있다.</li>
+      <li>스트링에 대한 포인터를 바로 가져오는 <code class="highlighter-rouge">mutable_getter</code>와 타입별 추가 <code class="highlighter-rouge">setter</code>이다.</li>
+      <li>해당 스트링에 값이 아직 셋팅되지 않아도 <code class="highlighter-rouge">mutable_</code> 메소드는 호출할 수 있으며, 셋팅이 안된 스트링은 빈 스트링으로 초기화된다.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">repeated extra method</code>
+    <ul>
+      <li><code class="highlighter-rouge">repeated</code> 필드들은 몇 가지 특별한 메소드를 가지고 있다.</li>
+      <li><code class="highlighter-rouge">_size</code> : 할당된 필드 요소들이 몇 개 인지</li>
+      <li><code class="highlighter-rouge">index</code>를 통해 지정된 요소 얻기</li>
+      <li>지정된 <code class="highlighter-rouge">index</code>의 요소를 업데이트</li>
+      <li><code class="highlighter-rouge">add_</code> : 필드에 새로운 요소를 추가하고 편집</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>더 정확한 메소드들의 역할 : <a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated">C++ generated code reference</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="enums-and-nested-classes">Enums and Nested Classes</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">Enum</code>
+    <ul>
+      <li>생성된 코드에는 <code class="highlighter-rouge">.proto</code>파일에 있는 <code class="highlighter-rouge">enum</code>과 대응되는 <code class="highlighter-rouge">PhoneType enum</code>을 포함하고 있다.</li>
+      <li><code class="highlighter-rouge">Person::PhoneType</code>에서 조회해 볼 수 있다.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">Nested class</code>
+    <ul>
+      <li>생성된 코드에는 <code class="highlighter-rouge">Person::PhoneNumber</code> 중첩 클래스도 존재한다.</li>
+      <li>실제로는 <code class="highlighter-rouge">Person_PhoneNumber</code>로 별도의 클래스를 생성한다.</li>
+      <li><code class="highlighter-rouge">Person</code>클래스 내부에서 <code class="highlighter-rouge">typedef</code>를 통해 중첩 클래스처럼 사용한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="standard-message-methods">Standard Message Methods</h2>
+
+<p>각각의 메시지 클래스들은 전체 메시지를 체크하고 조작할 수 있는 몇 가지 서로 다른 메소드들을 가지고 있다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">bool IsInitialized() const</code> : 모든 required 필드들이 셋팅되어 있는지 체크</li>
+  <li><code class="highlighter-rouge">string DebugString() const</code> : 읽을 수 있는 형태로 메시지를 리턴한다. 특히 디버깅 시에 유리하다.</li>
+  <li><code class="highlighter-rouge">void CopyFrom(const Person&amp; from)</code> : 전달해 준 값으로 메시지를 덮어 쓴다.</li>
+  <li><code class="highlighter-rouge">void Clear()</code> : 모든 요소들을 빈 상태로 지운다.</li>
+</ul>
+
+<blockquote>
+  <p>해당 메소드들은 C++ 프로토콜 버퍼 클래스들에 의해서 공유되는 <a href="https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message">Message 인터페이스 구현 섹션</a>에서 설명한다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="parsing-and-serialization">Parsing and Serialization</h2>
+
+<p>각각의 프로토콜 버퍼 클래스는 프로토콜 버퍼 <a href="https://developers.google.com/protocol-buffers/docs/encoding">바이너리 포맷</a>을 사용하는 타입의 메시지를 읽고 쓰는 메소드를 가지고 있다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">bool SerializeToString(string* output) const</code>
+    <ul>
+      <li>메시지를 직렬화하고 전달해준 스트링에 저장한다.</li>
+      <li>저장된 데이터들은 텍스트가 아닌 바이너리이다.</li>
+      <li>단지 편리한 컨테이너 사용을 위해서 스트링 클래스를 사용할 뿐이다.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">bool ParseFromString(const string&amp; data)</code> : 전달해 준 스트링으로부터 메시지를 파싱한다.</li>
+  <li><code class="highlighter-rouge">bool SerializeToOstream(ostream* output) const</code> : 전달해 준 C++ ostream 객체로 메시지를 쓴다.</li>
+  <li><code class="highlighter-rouge">bool ParseFromIstream(istream* input)</code> : 전달해 준 C++ istream에서 메시지를 파싱한다.</li>
+</ul>
+
+<blockquote>
+  <p>모든 메소드 리스트 : <a href="https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message">Message API reference</a></p>
+</blockquote>
+
+<h3 id="section">주의</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Protocol Buffers and O-O Design</code></p>
+
+  <p>프로토콜 버퍼 클래스들은 기본적으로 dumb 데이터 저장소이다(C++에서 struct 처럼).</p>
+
+  <p>프로토콜 버퍼 클래스들은 오브젝트 모델에서 좋은 일급 객체(first citizen class)들은 아니다.</p>
+
+  <p>생성된 클래스에 좀더 좋은 behaviour를 추가하려면, 가장 좋은 방법은 생성된 클래스를 어플리케이션 클래스로 래핑하는 것이다.</p>
+
+  <p>그리고 .proto 파일의 디자인 전체를 컨트롤하는 것이 없다면, 프로토콜 버퍼를 래핑하는 것은 좋은 생각이다.</p>
+
+  <p>이 경우, 자신의 어플리케이션의 유니크한 환경에 적절한 인터페이스를 구현한 래퍼 클래스를 사용할 수 있다</p>
+
+  <p>(몇몇 데이터들과 매소드들은 숨기고 편리한 함수들을 노출시키는 등).</p>
+
+  <p>하지만 절대로 프로토콜 버퍼 클래스들을 상속해서 매소드들을 추가해서는 안 된다.</p>
+
+  <p>이는 내부 메카니즘을 깨는 것이고 좋은 방법이 아니다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://developers.google.com/protocol-buffers/docs/overview">https://developers.google.com/protocol-buffers/docs/overview</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/network">network</a>,&nbsp;<a href="/tag/protocol-buffer">protocol-buffer</a>,&nbsp;<a href="/tag/google">google</a>,&nbsp;<a href="/tag/cpp">cpp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Google+protocol+buffer+%283%29+with+C%2B%2B&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-3.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Google+protocol+buffer+%283%29+with+C%2B%2B&u=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-3.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-3.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/network/2019/07/22/protocol-buffer-3.html') + '&title=Google protocol buffer (3) with C++'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

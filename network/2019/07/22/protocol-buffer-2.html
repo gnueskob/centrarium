@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Google protocol buffer (2) with C++</title>
+  <meta name="description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Google protocol buffer (2) with C++" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Google protocol buffer (2) with C++">
+  <meta name="twitter:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/network/2019/07/22/protocol-buffer-2.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Google protocol buffer (2) with C++</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 22. 18:20</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/network">Network</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>본 게시글은 <a href="https://developers.google.com/protocol-buffers/docs/cpptutorial">Protocol Buffer Basics: C++</a> 글을 토대로 작성하였습니다.</p>
+
+<hr />
+
+<h2 id="why-use-protocol-buffers">Why Use Protocol Buffers</h2>
+
+<p>구조화된 데이터를 어떻게 직렬화하고 어떻게 역직렬화를 해야 할까?</p>
+
+<ul>
+  <li>바이너리 형태의 raw 데이터
+    <ul>
+      <li>이 데이터 포맷은 받거나 읽는 코드가 정확히 동일해야 한다.</li>
+      <li>동일한 메모리 레이아웃으로 컴파일 되어야 하기 때문이다.</li>
+      <li>그렇기 때문에 깨지기 쉬운(<code class="highlighter-rouge">breakable</code>) 형태가 된다.</li>
+      <li>또한, 이 포맷으로 축적된 파일들과 연결된 어플리케이션들이 퍼지면 확장이 어렵다.</li>
+    </ul>
+  </li>
+  <li>애드훅 형태 (단일 스트링 인코딩)
+    <ul>
+      <li>ex) <code class="highlighter-rouge">12:3-23:67</code> 처럼 4개의 정수로 인코딩된 형태</li>
+      <li>간단하고 확장이 용이</li>
+      <li>인코딩과 파싱하는 코드를 작성해야 함</li>
+      <li>파싱은 약간의 런타임 비용을 부과</li>
+      <li>매우 간단한 인코딩을 하는데에는 이 방법이 최선</li>
+    </ul>
+  </li>
+  <li>XML
+    <ul>
+      <li>XML은 가독성이 높고 많은 언어들로 바인딩된 라이브러리들이 존재</li>
+      <li>다른 어플리케이션, 프로젝트와 데이터를 공유할 때 좋은 방안</li>
+      <li>하지만 XML은 공간 집약적이고많은 퍼포먼스 패널티를 가져오는 인코딩, 디코딩으로 소문이 자자함</li>
+      <li>XML DOM 트리를 탐색하는 것은 클래스에서 필드를 탐색하는 것 보다 복잡함</li>
+    </ul>
+  </li>
+</ul>
+
+<p>프로토콜 버퍼는 이러한 문제점들을 해결할 수 있는 <code class="highlighter-rouge">flexible</code>, <code class="highlighter-rouge">efficient</code>, <code class="highlighter-rouge">automated</code> 특성을 가진 자동화 솔루션이다.</p>
+
+<p>프토토콜 버퍼로 저장하려고 하는 데이터 구조에 대한 <code class="highlighter-rouge">.proto</code>파일을 작성한다.</p>
+
+<p>그 파일로부터, 프로토콜 버퍼 컴파일러는 효율적인 바이너리 포맷의 프로토콜 버퍼 데이터를 자동으로 인코딩하고 파싱하는 것을 구현하는 클래스를 생성한다.</p>
+
+<p>생성된 클래슨느 프로토콜 버퍼로 만들어진 필드들에 대한 <code class="highlighter-rouge">getter</code>, <code class="highlighter-rouge">setter</code>를 제공하고 하나의 유닛으로서 프로토콜 버퍼를 읽거나 쓰는 디테일한 부분을 책임진다.</p>
+
+<p>또한, 프로토콜 버퍼 포맷은 이전 버전 포맷으로 인코딩된 데이터를 여전히 읽을 수 있게 하면서 포맷을 확장할 수 있다.</p>
+
+<hr />
+
+<h2 id="defining-your-protocol-format">Defining Your Protocol Format</h2>
+
+<p>예제에서 사용할 데이터는 사람들의 주소 정보를 파일로 쓰거나 읽어오는 매우 간단한 address book 어플리케이션이다.</p>
+
+<p>주소록에 있는 각각의 사람들은 이름, ID, 이메일 주소, 전화번호를 가지고 있다.</p>
+
+<p>가장 먼저 <code class="highlighter-rouge">.proto</code>파일부터 시작해야 한다. <code class="highlighter-rouge">.proto</code>파일에 있는 정의들은 간단하다.</p>
+
+<p>직렬화하려는 각각의 데이터 구조들에 대한 메시지를 추가하고, 메시지에서 각각의 필드들에 대한 이름과 타입을 지정한다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">addressbook.proto</code></li>
+</ul>
+
+<div class="language-proto highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">tutorial</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">Person</span> <span class="p">{</span>
+  <span class="k">required</span> <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">required</span> <span class="kt">int32</span> <span class="na">id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">optional</span> <span class="kt">string</span> <span class="na">email</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="kd">enum</span> <span class="n">PhoneType</span> <span class="p">{</span>
+    <span class="na">MOBILE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="na">HOME</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="na">WORK</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">message</span> <span class="nc">PhoneNumber</span> <span class="p">{</span>
+    <span class="k">required</span> <span class="kt">string</span> <span class="na">number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">optional</span> <span class="n">PhoneType</span> <span class="na">type</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">HOME</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">repeated</span> <span class="n">PhoneNumber</span> <span class="na">phone</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">AddressBook</span> <span class="p">{</span>
+  <span class="k">repeated</span> <span class="n">Person</span> <span class="na">person</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">package</code></p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">.proto</code>파일은 <code class="highlighter-rouge">package</code>선언으로 시작한다.</p>
+      </li>
+      <li>
+        <p>패키지 선언은 서로 다른 프로젝트들 간의 이름 혼선을 방지하기 위함이다.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">C++</code>에서는 생성된 클래스들은 패키지 이름과 동일한 <code class="highlighter-rouge">namespace</code>안에 위치할 것이다.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">message</code></p>
+
+    <ul>
+      <li>
+        <p>패키지 선언 후에 자신이 정의할 데이터 구조에 맞는 메시지 정의들이 나온다.</p>
+      </li>
+      <li>
+        <p>메시지는 타입 형태의 필드들을 포함하는 집합체다.</p>
+      </li>
+      <li>간단한 표준 데이터 타입들이 필드 타입으로 사용된다.
+        <ul>
+          <li><code class="highlighter-rouge">bool</code>, <code class="highlighter-rouge">int32</code>, <code class="highlighter-rouge">float</code>, <code class="highlighter-rouge">double</code>, <code class="highlighter-rouge">string</code> 등</li>
+        </ul>
+      </li>
+      <li>필드 타입으로 그 외의 메시지 타입들을 이용할 수도 있다.
+        <ul>
+          <li>ex) <code class="highlighter-rouge">Person</code>메시지가 <code class="highlighter-rouge">PhoneNumber</code>메시지를 포함하고 있다.</li>
+          <li>ex) <code class="highlighter-rouge">AddressBook</code>aptlwlsms <code class="highlighter-rouge">Person</code>메시지들을 포함하고 있다.</li>
+        </ul>
+      </li>
+      <li>
+        <p>다른 메시지 안쪽에서 메시지 타입을 정의할 수도 있다.</p>
+      </li>
+      <li>필드들에 <code class="highlighter-rouge">enum</code>같은 상수를 정의하여 사용할 수도 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">field</code></p>
+
+    <ul>
+      <li>
+        <p>각각의 요소들의 <code class="highlighter-rouge">= 1</code>, <code class="highlighter-rouge">= 2</code> 마커들은 필드가 바이너리 인코딩에서 사용하는 유니크한 태그를 식별하도록 해준다.</p>
+      </li>
+      <li>
+        <p>태그 넘버 <code class="highlighter-rouge">1 ~ 15</code>는 인코딩 하는데 <code class="highlighter-rouge">1</code> 이하의 바이트를 요구한다.</p>
+      </li>
+      <li>
+        <p>따라서, 일반적으로 사용되거나 반복적인 요소들에 대해서 좋은 최적화 방안이다.</p>
+      </li>
+      <li>
+        <p>각각의 필드는 다음의 <code class="highlighter-rouge">modifier</code> 중에 하나를 포함해야 한다.</p>
+        <ul>
+          <li>
+            <p><strong>주의</strong> : <code class="highlighter-rouge">proto3</code>버전에서는 <code class="highlighter-rouge">required</code>, <code class="highlighter-rouge">optional</code>, <code class="highlighter-rouge">default</code> 지시자가 더 이상 사용되지 않는다.</p>
+          </li>
+          <li><code class="highlighter-rouge">required</code> : 이 필드의 값은 반드시 제공되어야 함
+            <ul>
+              <li>제공되지 않으면 초기화되지 않은 것으로 간주될 것이다.</li>
+              <li><code class="highlighter-rouge">libprotobuf</code>가 디버그 모드에서 컴파일되면, 초기화되지 않은 메시지의 직렬화는 실패하게 된다.</li>
+              <li>최적화 빌드에서는 이러한 체크가 스킵되고 메시지는 그냥 작성될 것이다.</li>
+              <li>하지만 초기화되지 않은 메시지를 파싱하는 것은 항상 실패할 것이다.</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">optional</code> : 이 필드는 셋팅되도 되고 안되도 된다.
+            <ul>
+              <li>필드가 셋팅되지 않으면 기본값이 사용된다.</li>
+              <li>숫자에서는 <code class="highlighter-rouge">0</code>, 스트링에서는 빈 스트링, <code class="highlighter-rouge">bool</code>에서는 <code class="highlighter-rouge">false</code>가 사용된다.</li>
+              <li>임베디드된 메시지들에 대해서는 기본 값은 항상 필드에 셋팅된 값이 없다는 메시지의 <code class="highlighter-rouge">default instance</code> 혹은 <code class="highlighter-rouge">prototype</code>이다.</li>
+              <li>값이 셋팅되지 않은 필드의 값을 가져올 때 항상 그 필드의 기본값을 리턴한다.</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">repeated</code> : 이 필드는 <code class="highlighter-rouge">0</code>번 이상 반복된다.
+            <ul>
+              <li>반복되는 값들의 순서는 프로토콜 버퍼에 보존된다.</li>
+              <li>이 필드는 <code class="highlighter-rouge">dynamic</code>하게 사이즈가 변하는 배열로 생각할 수 있다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="section">주의</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Required is Forever</code></p>
+
+  <p>특정 시점에서 <code class="highlighter-rouge">required</code> 필드를 쓰거나 전송하는 것을 멈추려고 <code class="highlighter-rouge">optional</code>로 바꾸면 문제가 생길수도 있다.</p>
+
+  <p>이전 <code class="highlighter-rouge">reader</code>들은 이 필드가 없는 메시지들을 미완성 메시지로 간주하고 모두 드랍시키거나 거부할 수도 있다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://developers.google.com/protocol-buffers/docs/overview">https://developers.google.com/protocol-buffers/docs/overview</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/network">network</a>,&nbsp;<a href="/tag/protocol-buffer">protocol-buffer</a>,&nbsp;<a href="/tag/google">google</a>,&nbsp;<a href="/tag/cpp">cpp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Google+protocol+buffer+%282%29+with+C%2B%2B&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-2.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Google+protocol+buffer+%282%29+with+C%2B%2B&u=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-2.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-2.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/network/2019/07/22/protocol-buffer-2.html') + '&title=Google protocol buffer (2) with C++'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

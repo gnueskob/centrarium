@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Github page 사용시 Jekyll에서 외부 플러그인 사용</title>
+  <meta name="description" content="Using Jekyll plugins on GitHub Pages">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Using Jekyll plugins on GitHub Pages" />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Github page 사용시 Jekyll에서 외부 플러그인 사용" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Github page 사용시 Jekyll에서 외부 플러그인 사용">
+  <meta name="twitter:description" content="Using Jekyll plugins on GitHub Pages">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/jekyll/2019/07/14/plugin.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Github page 사용시 Jekyll에서 외부 플러그인 사용</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 14. 00:12</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/jekyll">Jekyll</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="using-jekyll-plugins-on-github-pages">Using Jekyll plugins on GitHub Pages</h2>
+
+<p>깃허브 페이지는 커스텀 플러그인을 허용하지 않는다. 깃헙 페이지에서 Jekyll 플러그인을 사용하기 위해서 컴파일된 페이지 소스 자체를 publish 한다.</p>
+
+<p>깃허브는 <code class="highlighter-rouge">master</code> 브랜치를 기준으로 페이지를 publish 해주기 때문에 컴파일된 파일들을 이곳에 올려놓아야 한다.</p>
+
+<p>로컬에서 빌드해서 얻은 <code class="highlighter-rouge">_site</code> 정적 파일들을 깃허브 페이지가 호스팅하는 <code class="highlighter-rouge">master</code> 브랜치에 직접 올리고, 별도의 <code class="highlighter-rouge">source</code> 브랜치를 만들어 본래의 구조대로 관리한다.</p>
+
+<hr />
+
+<h2 id="prepare-repository">Prepare repository</h2>
+
+<p><code class="highlighter-rouge">source</code> 브랜치를 새로 생성한다.</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>git checkout -b <span class="nb">source </span>master
+git push -u origin <span class="nb">source</span>
+</code></pre>
+</div>
+
+<p>그 뒤 repo 설정으로 가서 <code class="highlighter-rouge">source</code> 브랜치를 해당 repo의 기본(<code class="highlighter-rouge">default</code>) 브랜치로 설정한다.</p>
+
+<hr />
+
+<h2 id="automate-publishing">Automate publishing</h2>
+
+<p>블로그 내용이 수정될 때마다 빌드하여 <code class="highlighter-rouge">_site</code> 폴더를 만들고 해당 폴더를 <code class="highlighter-rouge">master</code> 브랜치로 <code class="highlighter-rouge">push</code> 해야 하므로 이 작업을 자동화한다.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"rubygems"</span>
+<span class="nb">require</span> <span class="s2">"tmpdir"</span>
+
+<span class="nb">require</span> <span class="s2">"bundler/setup"</span>
+<span class="nb">require</span> <span class="s2">"jekyll"</span>
+
+<span class="c1"># Change your GitHub reponame</span>
+<span class="no">GITHUB_REPONAME</span> <span class="o">=</span> <span class="s2">"gnueskob/gnueskob.github.io"</span>
+
+<span class="n">desc</span> <span class="s2">"Generate blog files"</span>
+<span class="n">task</span> <span class="ss">:generate</span> <span class="k">do</span>
+  <span class="no">Jekyll</span><span class="o">::</span><span class="no">Site</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Jekyll</span><span class="p">.</span><span class="nf">configuration</span><span class="p">({</span>
+    <span class="s2">"source"</span>      <span class="o">=&gt;</span> <span class="s2">"."</span><span class="p">,</span>
+    <span class="s2">"destination"</span> <span class="o">=&gt;</span> <span class="s2">"_site"</span>
+  <span class="p">})).</span><span class="nf">process</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s2">"Generate and publish blog to gh-pages"</span>
+<span class="n">task</span> <span class="ss">:publish</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:generate</span><span class="p">]</span> <span class="k">do</span>
+  <span class="no">Dir</span><span class="p">.</span><span class="nf">mktmpdir</span> <span class="k">do</span> <span class="o">|</span><span class="n">tmp</span><span class="o">|</span>
+    <span class="n">cp_r</span> <span class="s2">"_site/."</span><span class="p">,</span> <span class="n">tmp</span>
+
+    <span class="n">pwd</span> <span class="o">=</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">pwd</span>
+    <span class="no">Dir</span><span class="p">.</span><span class="nf">chdir</span> <span class="n">tmp</span>
+
+    <span class="nb">system</span> <span class="s2">"git init"</span>
+    <span class="nb">system</span> <span class="s2">"git add ."</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">"Site updated at </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">utc</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">system</span> <span class="s2">"git commit -m </span><span class="si">#{</span><span class="n">message</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">system</span> <span class="s2">"git remote add origin git@github.com:</span><span class="si">#{</span><span class="no">GITHUB_REPONAME</span><span class="si">}</span><span class="s2">.git"</span>
+    <span class="nb">system</span> <span class="s2">"git push origin master --force"</span>
+
+    <span class="no">Dir</span><span class="p">.</span><span class="nf">chdir</span> <span class="n">pwd</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">rake generate</code> 명령을 통해 <code class="highlighter-rouge">_site</code> 정적파일들을 생성</li>
+  <li><code class="highlighter-rouge">rake publish</code>를 통해 <code class="highlighter-rouge">master</code>브랜치에 <code class="highlighter-rouge">git push</code> 명령까지 수행</li>
+  <li><code class="highlighter-rouge">source</code> 브랜치에서 수정한 것은 따로 커밋메시지를 추가하여 관리</li>
+</ul>
+
+<hr />
+
+<h2 id="site-"><code class="highlighter-rouge">_site</code> 폴더</h2>
+
+<p>Jekyll 블로그 프로젝트를 빌드하면 다음과 같은 <code class="highlighter-rouge">_site</code> 정적 파일구조를 생성한다.</p>
+
+<div class="language-text highlighter-rouge"><pre class="highlight"><code>├─about
+├─assets
+│  ├─icons
+│  └─imgs
+├─category      &lt;= post 글에서 선언한 카테고리들
+│  ├─dailylife
+│  └─jekyll
+├─css
+├─dailylife     &lt;= dailylife 카테고리 post 글
+│  └─2019
+│      └─07
+│          └─07
+├─jekyll        &lt;= jekyll 카테고리 post 글
+│  ├─2015
+│  │  └─04
+│  │      └─18
+│  └─2019
+│      └─07
+│          └─14
+├─posts
+├─tag           &lt;= post 글에서 선언한 태그들
+│  ├─github
+│  └─jekyll
+└─typography
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html">http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html</a></li>
+  <li><a href="https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html">https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/github">github</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Github+page+%EC%82%AC%EC%9A%A9%EC%8B%9C+Jekyll%EC%97%90%EC%84%9C+%EC%99%B8%EB%B6%80+%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8+%EC%82%AC%EC%9A%A9&url=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fplugin.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Github+page+%EC%82%AC%EC%9A%A9%EC%8B%9C+Jekyll%EC%97%90%EC%84%9C+%EC%99%B8%EB%B6%80+%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8+%EC%82%AC%EC%9A%A9&u=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fplugin.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Fjekyll%2F2019%2F07%2F14%2Fplugin.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/jekyll/2019/07/14/plugin.html') + '&title=Github page 사용시 Jekyll에서 외부 플러그인 사용'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

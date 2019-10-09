@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Visual Studio 2019 - External Library import</title>
+  <meta name="description" content="이 글에선 Visual Studio에서 외부 라이브러리를 사용하는 방법을 소개한다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이 글에선 Visual Studio에서 외부 라이브러리를 사용하는 방법을 소개한다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Visual Studio 2019 - External Library import" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Visual Studio 2019 - External Library import">
+  <meta name="twitter:description" content="이 글에선 Visual Studio에서 외부 라이브러리를 사용하는 방법을 소개한다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/editor/2019/08/11/external-lib.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Visual Studio 2019 - External Library import</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 8. 11. 21:00</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/editor">Editor</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이 글에선 Visual Studio에서 외부 라이브러리를 사용하는 방법을 소개한다.</p>
+
+<p>Visual Studio 2019를 기준으로 작성되었다.</p>
+
+<p><a href="/assets/visualStudio/external-lib-boost.PNG" data-lightbox="falcon9-large" data-title="boost"><img src="/assets/visualStudio/external-lib-boost.PNG" alt="img" style="max-width: 70%; height: auto;" /></a></p>
+
+<hr />
+
+<h2 id="section">프로젝트 설정</h2>
+
+<p>현재 열려있는 솔루션의 프로젝트 중 외부 라이브러리를 사용할 프로젝트의 설정을 조정해야 한다.</p>
+
+<p>솔루션 탐색기에서 원하는 프로젝트에 커서 우클릭으로 설정 창을 열거나 <code class="highlighter-rouge">Alt + Enter</code> 단축키를 이용한다.</p>
+
+<p><a href="/assets/visualStudio/sln-config.png" data-lightbox="falcon9-large" data-title="config"><img src="/assets/visualStudio/sln-config.png" alt="img" style="max-width: 60%; height: auto;" /></a></p>
+
+<hr />
+
+<h2 id="section-1">추가 포함 디렉터리</h2>
+
+<p><code class="highlighter-rouge">#include</code>를 통해 라이브러리를 사용하기 위해 프로젝트에 라이브러리의 헤더를 포함시켜야 한다.</p>
+
+<p>프로젝트의 설정 창을 열었다면, <code class="highlighter-rouge">C/C++</code> 탭에서 <strong>추가 포함 디렉터리</strong>를 수정해야 한다.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">C/C++</code>탭이 없다면, 현재 프로젝트에 일단 <code class="highlighter-rouge">.cpp</code>파일 하나를 생성해보자.</p>
+</blockquote>
+
+<p>라이브러리의 각종 헤더파일 등이 위치한 폴더 경로를 등록한다.</p>
+
+<p><a href="/assets/visualStudio/additional-include-dir.png" data-lightbox="falcon9-large" data-title="additional-include-dir"><img src="/assets/visualStudio/additional-include-dir.png" alt="img" /></a></p>
+
+<p>추가 포함 디렉터리 우측 입력란의 화살표(∨), <code class="highlighter-rouge">&lt;편집...&gt;</code>을 클릭하여 여러가지 디렉터리 경로를 추가할 수 있다.</p>
+
+<p>위 이미지의 예시는 <code class="highlighter-rouge">boost</code>라이브러리를 추가한 상태이다.</p>
+
+<p>예시로 볼 수 있듯이 경로는 절대경로, 상대경로 모두 가능하며 비주얼 스튜디오에서 제공하는 <code class="highlighter-rouge">매크로</code>를 이용할 수 있다.</p>
+
+<p><code class="highlighter-rouge">$(ProjectDir)</code> 매크로는 현재 프로젝트의 절대경로를 의미한다.</p>
+
+<p>추가 포함 디렉터리는 추가한 폴더의 하위 폴더까지 전부 인식된다.</p>
+
+<hr />
+
+<h2 id="section-2">추가 라이브러리 디렉터리</h2>
+
+<p>헤더 파일을 포함시켰다면 실제 라이브러리를 링크시켜야한다.</p>
+
+<p>설정 탭의 <code class="highlighter-rouge">링커</code>탭에서 <strong>추가 라이브러리 디렉터리</strong>를 수정하자.</p>
+
+<p><a href="/assets/visualStudio/additional-lib-dir.png" data-lightbox="falcon9-large" data-title="additional-lib-dir"><img src="/assets/visualStudio/additional-lib-dir.png" alt="img" /></a></p>
+
+<p>실제 <code class="highlighter-rouge">.lib</code>파일이 위치한 경로를 이곳에 추가한다.</p>
+
+<p>실제 컴파일 당시 이곳에서 추가한 라이브러리 파일이 링크된다.</p>
+
+<h3 id="section-3">추가 종속성</h3>
+
+<p>특정 라이브러리를 명시에서 입력해야 하는 경우도 존재하는데, 이런 경우 <code class="highlighter-rouge">링커 &gt; 입력</code>탭의 <code class="highlighter-rouge">추가 종속성</code> 입력란을 이용한다.</p>
+
+<p><a href="/assets/visualStudio/additional-dependancy-lib.png" data-lightbox="falcon9-large" data-title="additional-dep-lib"><img src="/assets/visualStudio/additional-dependancy-lib.png" alt="img" /></a></p>
+
+<p>라이브러리 파일 명을 앞서 했던 것처럼 똑같이 <code class="highlighter-rouge">&lt;편집...&gt;</code>란에서 추가한다.</p>
+
+<hr />
+
+<h2 id="section-4">주의 및 확인</h2>
+
+<p>라이브러리에 따라 프로젝트 플랫폼 설정, <code class="highlighter-rouge">C/C++ &gt; 코드생성</code>의 런타임 라이브러리 설정을 바꿔야 하는 경우도 존재한다.</p>
+
+<p>추가 포함 디렉터리, 추가 라이브러리 디렉터리 설정을 마쳤다면 외부 라이브러리를 <code class="highlighter-rouge">#include</code>하고 빌드해서 제대로 작동하는지 확인하자.</p>
+
+<p><a href="/assets/visualStudio/lib-build.PNG" data-lightbox="falcon9-large" data-title="lib-bulid"><img src="/assets/visualStudio/lib-build.PNG" alt="img" /></a></p>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/editor">editor</a>,&nbsp;<a href="/tag/visual-studio">visual-studio</a>,&nbsp;<a href="/tag/external-library">external-library</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Visual+Studio+2019+-+External+Library+import&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F11%2Fexternal-lib.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Visual+Studio+2019+-+External+Library+import&u=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F11%2Fexternal-lib.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Feditor%2F2019%2F08%2F11%2Fexternal-lib.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/editor/2019/08/11/external-lib.html') + '&title=Visual Studio 2019 - External Library import'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>

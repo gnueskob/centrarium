@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143826254-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-143826254-1');
+  </script>
+  
+
+  <title>Google protocol buffer (4) with C++</title>
+  <meta name="description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  
+  <meta name="author" content="Gnues">
+  <meta name="copyright" content="&copy; Gnues 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다." />
+  <meta property="og:url" content="http://gnueskob.github.io" />
+  <meta property="og:site_name" content="Don't be Expert Beginner" />
+  <meta property="og:title" content="Google protocol buffer (4) with C++" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gnueskob.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Google protocol buffer (4) with C++">
+  <meta name="twitter:description" content="본 게시글은 Protocol Buffer Basics: C++ 글을 토대로 작성하였습니다.">
+  <meta name="twitter:image" content="http://gnueskob.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gnueskob.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gnueskob.github.io/network/2019/07/22/protocol-buffer-4.html">
+  <link rel="alternate" type="application/rss+xml" title="Don't be Expert Beginner" href="http://gnueskob.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Don't be Expert Beginner">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About Me</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Google protocol buffer (4) with C++</h1>
+      <p class="info">by <strong>Gnues</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">2019. 7. 22. 18:20</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/network">Network</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>본 게시글은 <a href="https://developers.google.com/protocol-buffers/docs/cpptutorial">Protocol Buffer Basics: C++</a> 글을 토대로 작성하였습니다.</p>
+
+<hr />
+
+<h2 id="writing-a-message">Writing A Message</h2>
+
+<p>프로토콜 버퍼 클래스들을 사용해보자.</p>
+
+<p>아래의 예제 코드는 파일로부터 <code class="highlighter-rouge">AddressBook</code>을 읽어와서 유저의 입력을 받고 새로운 <code class="highlighter-rouge">Person</code>을 추가하는 프로그램이다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include "addressbook.pb.h"
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// This function fills in a Person message based on user input.
+</span><span class="kt">void</span> <span class="nf">PromptForAddress</span><span class="p">(</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">*</span> <span class="n">person</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter person ID number: "</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">id</span><span class="p">;</span>
+  <span class="n">person</span><span class="o">-&gt;</span><span class="n">set_id</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="n">cin</span><span class="p">.</span><span class="n">ignore</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="sc">'\n'</span><span class="p">);</span>
+
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter name: "</span><span class="p">;</span>
+  <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="o">*</span><span class="n">person</span><span class="o">-&gt;</span><span class="n">mutable_name</span><span class="p">());</span>
+
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter email address (blank for none): "</span><span class="p">;</span>
+  <span class="n">string</span> <span class="n">email</span><span class="p">;</span>
+  <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">email</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">email</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">person</span><span class="o">-&gt;</span><span class="n">set_email</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter a phone number (or leave blank to finish): "</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">number</span><span class="p">;</span>
+    <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">number</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">::</span><span class="n">PhoneNumber</span><span class="o">*</span> <span class="n">phone_number</span> <span class="o">=</span> <span class="n">person</span><span class="o">-&gt;</span><span class="n">add_phone</span><span class="p">();</span>
+    <span class="n">phone_number</span><span class="o">-&gt;</span><span class="n">set_number</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Is this a mobile, home, or work phone? "</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">type</span><span class="p">;</span>
+    <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">"mobile"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">phone_number</span><span class="o">-&gt;</span><span class="n">set_type</span><span class="p">(</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">::</span><span class="n">MOBILE</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">"home"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">phone_number</span><span class="o">-&gt;</span><span class="n">set_type</span><span class="p">(</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">::</span><span class="n">HOME</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">"work"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">phone_number</span><span class="o">-&gt;</span><span class="n">set_type</span><span class="p">(</span><span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">::</span><span class="n">WORK</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Unknown phone type.  Using default."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Main function:  Reads the entire address book from a file,
+//   adds one person based on user input, then writes it back out to the same
+//   file.
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="c1">// Verify that the version of the library that we linked against is
+</span>  <span class="c1">// compatible with the version of the headers we compiled against.
+</span>  <span class="n">GOOGLE_PROTOBUF_VERIFY_VERSION</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Usage:  "</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ADDRESS_BOOK_FILE"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">tutorial</span><span class="o">::</span><span class="n">AddressBook</span> <span class="n">address_book</span><span class="p">;</span>
+
+  <span class="p">{</span>
+    <span class="c1">// Read the existing address book.
+</span>    <span class="n">fstream</span> <span class="n">input</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ios</span><span class="o">::</span><span class="n">in</span> <span class="o">|</span> <span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">": File not found.  Creating a new file."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">address_book</span><span class="p">.</span><span class="n">ParseFromIstream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Failed to parse address book."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Add an address.
+</span>  <span class="n">PromptForAddress</span><span class="p">(</span><span class="n">address_book</span><span class="p">.</span><span class="n">add_person</span><span class="p">());</span>
+
+  <span class="p">{</span>
+    <span class="c1">// Write the new address book back to disk.
+</span>    <span class="n">fstream</span> <span class="n">output</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">ios</span><span class="o">::</span><span class="n">trunc</span> <span class="o">|</span> <span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">address_book</span><span class="p">.</span><span class="n">SerializeToOstream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">output</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Failed to write address book."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Optional:  Delete all global objects allocated by libprotobuf.
+</span>  <span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="o">::</span><span class="n">ShutdownProtobufLibrary</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">C++</code> 프로토콜 버퍼 라이브러리를 사용하기 전에 <code class="highlighter-rouge">GOOGLE_PROTOBUF_VERIFY_VERSION</code> 매크로를 사용하자.</p>
+
+<p>이 매크로는 우연히 컴파일된 헤더의 버전과 호환이 되지 않는 버전의 라이브러리를 링크했는지 확인한다.</p>
+
+<p><code class="highlighter-rouge">ShutdownProtoBufLibrary()</code> 함수는 프로토콜 버퍼 라이브러리에 의해서 할당된 전역 오브젝트들을 제거한다.</p>
+
+<hr />
+
+<h2 id="reading-a-message">Reading A Message</h2>
+
+<p>저장된 파일을 읽어서 모든 정보들을 프린트하는 예제 코드이다.</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include "addressbook.pb.h"
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// Iterates though all people in the AddressBook and prints info about them.
+</span><span class="kt">void</span> <span class="nf">ListPeople</span><span class="p">(</span><span class="k">const</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">AddressBook</span><span class="o">&amp;</span> <span class="n">address_book</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">address_book</span><span class="p">.</span><span class="n">person_size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">&amp;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">address_book</span><span class="p">.</span><span class="n">person</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Person ID: "</span> <span class="o">&lt;&lt;</span> <span class="n">person</span><span class="p">.</span><span class="n">id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Name: "</span> <span class="o">&lt;&lt;</span> <span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">has_email</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  E-mail address: "</span> <span class="o">&lt;&lt;</span> <span class="n">person</span><span class="p">.</span><span class="n">email</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">person</span><span class="p">.</span><span class="n">phone_size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Person</span><span class="o">::</span><span class="n">PhoneNumber</span><span class="o">&amp;</span> <span class="n">phone_number</span> <span class="o">=</span> <span class="n">person</span><span class="p">.</span><span class="n">phone</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="n">phone_number</span><span class="p">.</span><span class="n">type</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">tutorial</span><span class="p">:</span><span class="o">:</span><span class="n">Person</span><span class="o">::</span><span class="n">MOBILE</span><span class="o">:</span>
+          <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Mobile phone #: "</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="n">tutorial</span><span class="p">:</span><span class="o">:</span><span class="n">Person</span><span class="o">::</span><span class="n">HOME</span><span class="o">:</span>
+          <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Home phone #: "</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="n">tutorial</span><span class="p">:</span><span class="o">:</span><span class="n">Person</span><span class="o">::</span><span class="n">WORK</span><span class="o">:</span>
+          <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Work phone #: "</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">phone_number</span><span class="p">.</span><span class="n">number</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Main function:  Reads the entire address book from a file and prints all
+//   the information inside.
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="c1">// Verify that the version of the library that we linked against is
+</span>  <span class="c1">// compatible with the version of the headers we compiled against.
+</span>  <span class="n">GOOGLE_PROTOBUF_VERIFY_VERSION</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Usage:  "</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ADDRESS_BOOK_FILE"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">tutorial</span><span class="o">::</span><span class="n">AddressBook</span> <span class="n">address_book</span><span class="p">;</span>
+
+  <span class="p">{</span>
+    <span class="c1">// Read the existing address book.
+</span>    <span class="n">fstream</span> <span class="n">input</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ios</span><span class="o">::</span><span class="n">in</span> <span class="o">|</span> <span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">address_book</span><span class="p">.</span><span class="n">ParseFromIstream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Failed to parse address book."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">ListPeople</span><span class="p">(</span><span class="n">address_book</span><span class="p">);</span>
+
+  <span class="c1">// Optional:  Delete all global objects allocated by libprotobuf.
+</span>  <span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="o">::</span><span class="n">ShutdownProtobufLibrary</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://developers.google.com/protocol-buffers/docs/overview">https://developers.google.com/protocol-buffers/docs/overview</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/network">network</a>,&nbsp;<a href="/tag/protocol-buffer">protocol-buffer</a>,&nbsp;<a href="/tag/google">google</a>,&nbsp;<a href="/tag/cpp">cpp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Google+protocol+buffer+%284%29+with+C%2B%2B&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-4.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Google+protocol+buffer+%284%29+with+C%2B%2B&u=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-4.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgnueskob.github.io%2Fnetwork%2F2019%2F07%2F22%2Fprotocol-buffer-4.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gnueskob.github.io/network/2019/07/22/protocol-buffer-4.html') + '&title=Google protocol buffer (4) with C++'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'https-gnueskob-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Don't be Expert Beginner</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About Me</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/timeline/">Timeline</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gnueskob@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gnueskob@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gnueskob" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gnues</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">This blog is designed to share server programming information.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+  </body>
+
+</html>
